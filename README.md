@@ -24,6 +24,11 @@ The service has defined a series of Script commands to start and validate that e
 | ```npm run test:service```   | Run service tests                                   |
 | ```npm run test:api```       | Run integration tests                               |
 
+Executable to run application in local:
+```sh
+npm run start
+```
+
 ## Dockerized
 
 | Command                                                                                     | Description                                        |
@@ -32,6 +37,10 @@ The service has defined a series of Script commands to start and validate that e
 | ```docker run -p 3000:3000 mfruiz/target-me```                                              | Use docker image                                   |
 | ```docker run -p 3000:3000 -e CERTIFICATE_PATH=/custom/certificate/path mfruiz/target-me``` | Start Up docker image with custom certificate path |
 
+Executable for command to build the docker image: 
+```sh
+docker build . -t mfruiz/target-me
+```
 
 ## Http status codes
 
