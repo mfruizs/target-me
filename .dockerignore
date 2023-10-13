@@ -1,0 +1,4 @@
+node_modules
+tests
+cert
+npm-debug.log

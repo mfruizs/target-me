@@ -1,0 +1,6 @@
+{
+  "max_sleep_time_on_seconds": 60,
+  "port": 3000,
+  "prefix_header": "X-TargetMe-header-",
+  "certificate_path": "./cert/"
+}

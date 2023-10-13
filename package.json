@@ -1,0 +1,41 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
+    "supertest": "^6.3.3"
+  },
+  "name": "target-me",
+  "description": "Own alternative to 'httpstat.us' website for external connection testing",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "start:insecure": "NODE_ENV=test node server.js",
+    "test": "jest",
+    "test:all": "jest --testPathPattern=./tests/",
+    "test:util": "jest --testPathPattern=./tests/utils/",
+    "test:service": "jest --testPathPattern=./tests/services/",
+    "test:api": "jest --testPathPattern=./tests/integration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/mfruiz/target-me.git"
+  },
+  "keywords": [
+    "test",
+    "httpstatus",
+    "web"
+  ],
+  "author": "Manuel Fco. Ruiz Sánchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/mfruiz/target-me/issues"
+  },
+  "homepage": "https://gitlab.com/mfruiz/target-me#readme",
+  "devDependencies": {
+    "jest": "^29.3.1"
+  }
+}

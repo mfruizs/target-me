@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Target-me!</title>
+	<meta content="text/html; charset=utf-8" />
+	<h1 id="target-me">Target Me</h1>
+
+	<div>
+		#############################################################################################################################
+		<div>
+			<p>
+				# <b>Creator</b>: Manuel Fco. Ruiz S&aacute;nchez
+			</p>
+			<p>
+				# <b>Project</b>: <a href="https://github.com/mfruizs/target-me">Target-me on Github</a>
+			</p>
+			<p>
+				# <b>Linkedin</b>: <a href="https://www.linkedin.com/in/manuel-fco-ruiz-s%C3%A1nchez-50786822b/">Manuel Fco Ruiz S&aacute;nchez</a>
+			</p>
+		</div>
+		#############################################################################################################################
+	</div>
+</head>
+
+
+<body>
+
+<h2 id="Description">Description</h2>
+
+<p>This is a service specialized in answering <a href="#http-status-codes">Http Status Codes</a> so that we can test services.
+	It offers the possibility of being able to return <a href="#custom-headers">custom headers</a> and even make the service have a <a href="#timeout-parameter">specific timeout</a>.
+	The service is prepared to allow requests using CORS.</p>
+<p>Another capability is the ability to answer custom status codes, which are defined in the <a href="./config/status.json"><strong>status.json</strong></a> file.
+	Feel free to make any changes or make a PR to modify it in the project.</p>
+<p>Once the project is deployed, we will be able to see its documentation through its <a href="./html/index.html">home page</a>,
+	which can be visited by simply visiting <strong>root domain</strong> ( <a href="https://localhost:3000/">localhost example</a> )</p>
+<h2 id="run-application">Run application</h2>
+<p>The service has defined a series of Script commands to start and validate that everything is correct.</p>
+<table>
+	<caption>npm commands</caption>
+	<thead>
+	<tr>
+		<th>Command</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>npm run start</code></td>
+		<td>Run sever with <a href="./cert">local</a> certificates (https)</td>
+	</tr>
+	<tr>
+		<td><code>npm run start:insecure</code></td>
+		<td>Run server without using local certificates (http)</td>
+	</tr>
+	<tr>
+		<td><code>npm run test</code></td>
+		<td>Run jest</td>
+	</tr>
+	<tr>
+		<td><code>npm run test:all</code></td>
+		<td>Run all tests</td>
+	</tr>
+	<tr>
+		<td><code>npm run test:util</code></td>
+		<td>Run utilities tests</td>
+	</tr>
+	<tr>
+		<td><code>npm run test:service</code></td>
+		<td>Run service tests</td>
+	</tr>
+	<tr>
+		<td><code>npm run test:api</code></td>
+		<td>Run integration tests</td>
+	</tr>
+	</tbody>
+</table>
+<h2 id="dockerized">Dockerized</h2>
+<table>
+	<caption>docker commands</caption>
+	<thead>
+	<tr>
+		<th>Command</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><code>docker build . -t mfruiz/target-me</code></td>
+		<td>Create docker image</td>
+	</tr>
+	<tr>
+		<td><code>docker run -p 3000:3000 mfruiz/target-me</code></td>
+		<td>Use docker image</td>
+	</tr>
+	<tr>
+		<td><code>docker run -p 3000:3000 -e CERTIFICATE_PATH=/custom/certificate/path mfruiz/target-me</code></td>
+		<td>Start Up docker image with custom certificate path</td>
+	</tr>
+	</tbody>
+</table>
+<h2 id="http-status-codes">Http status codes</h2>
+<p>The purpose of the service is to receive a PathVariable which contains the expected status code and even to be able to send a list
+	or range of codes that can be returned.</p>
+<ul>
+	<li><strong>simple</strong>:  <a href="https://localhost:3000/{statusCode}">https://localhost:3000/{statusCode}</a></li>
+	<li><strong>with sleep</strong>:  <a href="https://localhost:3000/{statusCode}?sleep=">https://localhost:3000/{statusCode}?sleep=</a></li>
+	<li><strong>code list</strong>:  <a href="https://localhost:3000/random/{statusCode},{statusCode},{statusCode}">https://localhost:3000/random/{statusCode},{statusCode},{statusCode}</a></li>
+	<li><strong>code range</strong>:  <a href="https://localhost:3000/random/{statusCode}-{statusCode}">https://localhost:3000/random/{statusCode}-{statusCode}</a></li>
+</ul>
+<p>Examples:</p>
+<table>
+	<caption>localhost url examples</caption>
+	<thead>
+	<tr>
+		<th>Description</th>
+		<th>url</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>200 with 2s Sleep</td>
+		<td><a href="https://localhost:3000/200?sleep=2">https://localhost:3000/200?sleep=2</a></td>
+	</tr>
+	<tr>
+		<td>504 with 2s Sleep</td>
+		<td><a href="https://localhost:3000/504?sleep=2">https://localhost:3000/504?sleep=2</a></td>
+	</tr>
+	<tr>
+		<td>statusCode 504</td>
+		<td><a href="https://localhost:3000/503">https://localhost:3000/503</a></td>
+	</tr>
+	<tr>
+		<td>StatusCode under 200</td>
+		<td><a href="https://localhost:3000/199">https://localhost:3000/199</a></td>
+	</tr>
+	<tr>
+		<td>No existing statusCode</td>
+		<td><a href="https://localhost:3000/1000">https://localhost:3000/1000</a></td>
+	</tr>
+	<tr>
+		<td>Random statusCode</td>
+		<td><a href="https://localhost:3000/random/200,203,500-504">https://localhost:3000/random/200,203,500-504</a></td>
+	</tr>
+	</tbody>
+</table>
+<h2 id="custom-headers">Custom headers</h2>
+<p>In case we need to receive response headers from the service, we can do it by adding them in the request headers.</p>
+<p>To do this, we must add a header that has the following prefix <code>X-TargetMe-header-</code></p>
+<p><strong>Request header:</strong>
+	<code>X-TargetMe-header-foo: bar</code></p>
+<p><strong>Response header:</strong>
+	<code>foo: bar</code></p>
+<h2 id="timeout-parameter">Timeout parameter</h2>
+<p>The service has a single query param with which we can make it have a response delay of N seconds.</p>
+<p>To do this operation is as simple as adding <code>?sleep=2</code> and we will be waiting 2 seconds</p>
+<h2 id="certification">Certification</h2>
+<p>In the example I have added a self-signed certificate by me as an example on <a href="./cert">./cert</a> folder</p>
+<p>This certificate will not be loaded in the Docker image, to add your own certificate, use <code>CERTIFICATE_PATH</code>.
+	when running the docker image and indicate the path where the following files are located.</p>
+<ul>
+	<li><a href="cert%2Fcert.pem">cert.pem</a></li>
+	<li><a href="cert%2Fcsr.pem">csr.pem</a></li>
+	<li><a href="cert%2Fkey.pem">key.pem</a></li>
+</ul>
+<blockquote>
+	<p><strong>Important:</strong> We will need to have the 3 files with the same name that exist in the example.
+		The service will validate the existence of these certificates and that they are valid to be able
+		to start with the <a href="https://en.wikipedia.org/wiki/HTTP">https scheme</a>.</p>
+</blockquote>
+<h1 id="disclaimer">Disclaimer</h1>
+<p>The goal of this project is to improve my programming knowledge in <strong>Node.js</strong>,
+	and for that, what better than using as an example of existing project <a href="https://httpstat.us/">https://httpstat.us/</a>
+	created in another language (<strong>C#</strong>)</p>
+<p>All coding has been done from zero and will be done in the most efficient way and using
+	the least number of libraries necessary to do it.</p>
+<p>In other words, it is my own alternative to &#39;<strong>httpstat.us</strong>&#39; website/project for
+	external connection testing.</p>
+<p>I would like to thank the creators of <strong>Httpstat.us</strong> project ( <a href="https://www.aaron-powell.com/">AARON POWELL</a> and <a href="https://tath.am/">TATHAM ODDIE</a> )
+	for doing a great job that I think has helped many developers.</p>
+</body>
+</html>
+
+
