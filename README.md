@@ -31,6 +31,8 @@ npm run start
 
 ## Dockerized
 
+> Official dockerhub repository: https://hub.docker.com/repository/docker/mfruiz/target-me
+
 | Command                                                                                     | Description                                        |
 |---------------------------------------------------------------------------------------------|----------------------------------------------------|
 | ```docker build . -t mfruiz/target-me```                                                    | Create docker image                                |
