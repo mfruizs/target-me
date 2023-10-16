@@ -5,7 +5,6 @@ const path              = config.certificate_path;
 
 const KEY_PERM  = path + "key.pem";
 const CERT_PERM = path + "cert.pem";
-const CSR_PERM  = path + "csr.pem";
 
 module.exports = {
     obtainCertifies: obtainCertifies,
@@ -29,7 +28,6 @@ async function obtainCertifies() {
 async function allowCertificateServer() {
     return await checkIfExistFile( KEY_PERM )
             && await checkIfExistFile( CERT_PERM )
-            && await checkIfExistFile( CSR_PERM )
             && validateCertificate();
 }
 

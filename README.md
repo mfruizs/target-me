@@ -33,11 +33,11 @@ npm run start
 
 > Official dockerhub repository: https://hub.docker.com/repository/docker/mfruiz/target-me
 
-| Command                                                                                     | Description                                        |
-|---------------------------------------------------------------------------------------------|----------------------------------------------------|
-| ```docker build . -t mfruiz/target-me```                                                    | Create docker image                                |
-| ```docker run -p 3000:3000 mfruiz/target-me```                                              | Use docker image                                   |
-| ```docker run -p 3000:3000 -e CERTIFICATE_PATH=/custom/certificate/path mfruiz/target-me``` | Start Up docker image with custom certificate path |
+| Command                                                                                 | Description                                        |
+|-----------------------------------------------------------------------------------------|----------------------------------------------------|
+| ```docker build . -t mfruiz/target-me```                                                | Create docker image                                |
+| ```docker run -p 3000:3000 --name target-me mfruiz/target-me```                         | Use docker image                                   |
+| ```docker run -p 3000:3000 --name target-me -v /mnt/cert/:/mnt/cert mfruiz/target-me``` | Start Up docker image with custom certificate path |
 
 Executable for command to build the docker image: 
 ```sh
@@ -88,14 +88,13 @@ To do this operation is as simple as adding `?sleep=2` and we will be waiting 2 
 
 In the example I have added a self-signed certificate by me as an example on [./cert](./cert) folder
 
-This certificate will not be loaded in the Docker image, to add your own certificate, use `CERTIFICATE_PATH`.
+This certificate will not be loaded in the Docker image, to add your own certificate, bind external route
 when running the docker image and indicate the path where the following files are located.
 
 * [cert.pem](cert%2Fcert.pem)
-* [csr.pem](cert%2Fcsr.pem)
 * [key.pem](cert%2Fkey.pem)
 
-> **Important:** We will need to have the 3 files with the same name that exist in the example.
+> **Important:** We will need to have the 2 files with the same name that exist in the example.
 > The service will validate the existence of these certificates and that they are valid to be able 
 > to start with the [https scheme](https://en.wikipedia.org/wiki/HTTP).
 
